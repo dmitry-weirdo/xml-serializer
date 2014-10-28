@@ -1,0 +1,51 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+				 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+				 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+
+	<groupId>ru.pda</groupId>
+	<artifactId>xmlSerializer</artifactId>
+	<name>xmlSerializer</name>
+	<version>1.0</version>
+
+	<packaging>jar</packaging>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>su.opencode.kefir</groupId>
+			<artifactId>kefir-util</artifactId>
+			<version>1.0</version>
+			<scope>compile</scope>
+			<optional>true</optional>
+		</dependency>
+
+		<dependency>
+			<groupId>su.opencode.kefir</groupId>
+			<artifactId>kefir-gen</artifactId>
+			<version>1.0</version>
+			<scope>compile</scope>
+			<optional>true</optional>
+		</dependency>
+
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.14</version>
+			<scope>compile</scope>
+			<optional>true</optional>
+		</dependency>
+
+		<dependency>
+			<groupId>org.firebirdsql.jdbc</groupId>
+			<artifactId>jaybird</artifactId>
+			<version>2.1.6</version>
+			<scope>compile</scope>
+			<optional>true</optional>
+		</dependency>
+
+
+	</dependencies>
+
+</project>
