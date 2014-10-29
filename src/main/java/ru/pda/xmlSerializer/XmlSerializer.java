@@ -15,6 +15,7 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 import su.opencode.kefir.util.FileUtils;
 import su.opencode.kefir.util.JaxbHelper;
+import su.opencode.kefir.util.ObjectUtils;
 import su.opencode.kefir.util.StringUtils;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -43,8 +44,11 @@ public class XmlSerializer
 		serializeToXml(departmentJobs, fileName);
 	}
 
-	public DepartmentJobs deserializeFromXml(String fileName) {
-		return JaxbHelper.jaxbObjectFromFile(DepartmentJobs.class, fileName); // much better than DOM parsing, but the task is to do DOM parsing
+	public DepartmentJobs deserializeFromXml(String fileName) throws IncorrectXmlFileException {
+		DepartmentJobs departmentJobs = JaxbHelper.jaxbObjectFromFile(DepartmentJobs.class, fileName);
+		validateJobs(departmentJobs);
+
+		return departmentJobs; // much better than DOM parsing, but the task is to do DOM parsing
 	}
 
 	public DepartmentJobs deserializeFromXmlUsingDomParser(String fileName) throws IncorrectXmlFileException {
@@ -215,6 +219,8 @@ public class XmlSerializer
 				}
 			}
 
+			validateJobs(jobs);
+
 			DepartmentJobs result = new DepartmentJobs();
 			result.setJobs(jobs);
 			return result;
@@ -234,6 +240,47 @@ public class XmlSerializer
 			e.printStackTrace();  // todo: handle exception
 			throw new RuntimeException(e);
 		}
+	}
+
+	/**
+	 * Выполняет проверку корректности заполнения должностей. Проверка на&nbsp;уникальность натуральных ключей не&nbsp;производится.
+	 * @param jobs список {@linkplain DepartmentJob должностей}, десериалиованных из&nbsp;xml-файла.
+	 * @throws IncorrectXmlFileException если хотя бы в&nbsp;одной из&nbsp;должностей найдена ошибка.
+	 */
+	private void validateJobs(List<DepartmentJob> jobs) throws IncorrectXmlFileException {
+		if ( ObjectUtils.empty(jobs) )
+			return;
+
+		for (DepartmentJob job : jobs)
+		{
+			// departmentCode
+			if ( StringUtils.emptyIfTrimmed( job.getDepartmentCode() ) )
+				throw new IncorrectXmlFileException( concat("DepartmentJob has empty departmentCode. DepartmentJob: ", job) );
+
+			if ( ( job.getDepartmentCode().length() > DepartmentJob.DEPARTMENT_CODE_MAX_LENGTH ))
+				throw new IncorrectXmlFileException( concat("DepartmentJob has departmentCode \"", job.getDepartmentCode(), "\" which is longer than allowable max length (", DepartmentJob.DEPARTMENT_CODE_MAX_LENGTH, " characters). DepartmentJob: ", job) );
+
+			// jobName
+			if ( StringUtils.emptyIfTrimmed( job.getJobName() ) )
+				throw new IncorrectXmlFileException( concat("DepartmentJob has empty jobName. DepartmentJob: ", job) );
+
+			if ( job.getJobName().length() > DepartmentJob.JOB_NAME_MAX_LENGTH )
+				throw new IncorrectXmlFileException( concat("DepartmentJob has jobName \"", job.getJobName(), "\" which is longer than allowable max length (", DepartmentJob.JOB_NAME_MAX_LENGTH, " characters). DepartmentJob: ", job) );
+
+			// description
+			if ( StringUtils.notEmpty(job.getDescription()) && (job.getDescription().length() > DepartmentJob.DESCRIPTION_MAX_LENGTH) )
+				throw new IncorrectXmlFileException( concat("DepartmentJob has description \"", job.getJobName(), "\" which is longer than allowable max length (", DepartmentJob.DESCRIPTION_MAX_LENGTH, " characters). DepartmentJob: ", job) );
+		}
+	}
+
+	/**
+	 * @param departmentJobs десерализованный из xml-файла список {@linkplain DepartmentJob должностей}.
+	 * @throws IncorrectXmlFileException если хотя бы в&nbsp;одной из&nbsp;должностей найдена ошибка.
+	 *
+	 * @see #validateJobs(java.util.List)
+	 */
+	private void validateJobs(DepartmentJobs departmentJobs) throws IncorrectXmlFileException {
+		validateJobs( departmentJobs.getJobs() );
 	}
 
 	private StringBuffer sb = new StringBuffer();

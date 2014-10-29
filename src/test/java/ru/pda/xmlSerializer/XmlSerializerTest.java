@@ -61,6 +61,10 @@ public class XmlSerializerTest
 	public void testDepartmentCodeEmptyIfTrimmedElement() throws IncorrectXmlFileException {
 		serializeResource("/xml/departmentCodeEmptyIfTrimmedElement.xml");
 	}
+	@Test(expected = IncorrectXmlFileException.class)
+	public void testDepartmentCodeTooLong() throws IncorrectXmlFileException {
+		serializeResource("/xml/departmentCodeTooLong.xml");
+	}
 
 	@Test(expected = IncorrectXmlFileException.class)
 	public void testJobNameMultipleElements() throws IncorrectXmlFileException {
@@ -90,6 +94,10 @@ public class XmlSerializerTest
 	public void testJobNameEmptyIfTrimmedElement() throws IncorrectXmlFileException {
 		serializeResource("/xml/jobNameEmptyIfTrimmedElement.xml");
 	}
+	@Test(expected = IncorrectXmlFileException.class)
+	public void testJobNameTooLong() throws IncorrectXmlFileException {
+		serializeResource("/xml/jobNameTooLong.xml");
+	}
 
 	@Test(expected = IncorrectXmlFileException.class)
 	public void testDescriptionMultipleElements() throws IncorrectXmlFileException {
@@ -106,6 +114,10 @@ public class XmlSerializerTest
 	@Test(expected = IncorrectXmlFileException.class)
 	public void testDescriptionNotTextChildElement() throws IncorrectXmlFileException {
 		serializeResource("/xml/descriptionNotTextChildElement.xml");
+	}
+	@Test(expected = IncorrectXmlFileException.class)
+	public void testDescriptionTooLong() throws IncorrectXmlFileException {
+		serializeResource("/xml/descriptionTooLong.xml");
 	}
 
 

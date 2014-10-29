@@ -7,6 +7,8 @@
  */
 package ru.pda.xmlSerializer;
 
+import su.opencode.kefir.util.StringUtils;
+
 import javax.xml.bind.annotation.*;
 
 /**
@@ -59,31 +61,79 @@ public class DepartmentJob
 	}
 
 	/**
+	 * Проверяет корректность заполнения должности: заполненность необходимых полей и&nbsp;их длину.
+	 * @return <code>true</code> &mdash; если сущность заполнена корректно;
+	 * <br/>
+	 * <code>false</code> &mdash; в&nbsp;противном случае.
+	 */
+	public boolean isValid() {
+		if ( StringUtils.emptyIfTrimmed(departmentCode) || (departmentCode.length() > DEPARTMENT_CODE_MAX_LENGTH))
+			return false;
+
+		if ( StringUtils.emptyIfTrimmed(jobName) || (jobName.length() > JOB_NAME_MAX_LENGTH))
+			return false;
+
+		if ( StringUtils.notEmpty(description) && (description.length() > DESCRIPTION_MAX_LENGTH) )
+			return false;
+
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return StringUtils.concat(
+				"["
+			,  " id: ", id
+			, ", departmentCode: ", departmentCode
+			, ", jobName: ", jobName
+			, ", description: ", description
+			, " ]"
+		);
+	}
+
+	/**
 	 * Идентификатор. Суррогатный ключ, заполняемый инкрементно с&nbsp;помощью генератора в&nbsp;базе данных.
-	 * Поле не сериализуется в&nbsp;xml-файл.
+	 * Поле не&nbsp;сериализуется в&nbsp;xml-файл.
 	 */
 	@XmlTransient
 	private Integer id;
 
 	/**
 	 * Код отдела.
-	 * Максимальная длина &mdash; 20 символов.
+	 * Максимальная длина &mdash; {@linkplain #DEPARTMENT_CODE_MAX_LENGTH 20 символов}.
 	 */
 	@XmlElement(name = DEPARTMENT_CODE_XML_ELEMENT_NAME) // only to coincide with DOM parser deserialization
 	private String departmentCode;
 
 	/**
 	 * Название должности в&nbsp;отделе.
-	 * Максимальная длина &mdash; 100 символов.
+	 * Максимальная длина &mdash; {@linkplain #JOB_NAME_MAX_LENGTH 100 символов}.
 	 */
 	@XmlElement(name = JOB_NAME_XML_ELEMENT_NAME) // only to coincide with DOM parser deserialization
 	private String jobName;
 
 	/**
-	 * Комментарий к&nbsp;должности. Может быть пустым.
+	 * Комментарий к&nbsp;должности.
+	 * Максимальная длина &mdash; {@linkplain #DESCRIPTION_MAX_LENGTH 255 символов}.
+	 * Может быть пустым.
 	 */
 	@XmlElement(name = DESCRIPTION_XML_ELEMENT_NAME) // only to coincide with DOM parser deserialization
 	private String description;
+
+	/**
+	 * Максимальная длина {@linkplain #departmentCode кода отдела}.
+	 */
+	public static final int DEPARTMENT_CODE_MAX_LENGTH = 20;
+
+	/**
+	 * Максимальная длина {@linkplain #jobName названия должности}.
+	 */
+	public static final int JOB_NAME_MAX_LENGTH = 100;
+
+	/**
+	 * Максимальная длина {@linkplain #description комментария к&nbsp;должности}.
+	 */
+	public static final int DESCRIPTION_MAX_LENGTH = 255;
 
 	/**
 	 * Название элемента {@linkplain #departmentCode кода отдела} при&nbsp;сериализации в&nbsp;xml.
