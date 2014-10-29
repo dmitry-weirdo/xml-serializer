@@ -19,7 +19,7 @@ import static su.opencode.kefir.util.StringUtils.concat;
  */
 public class DepartmentJobGenerator
 {
-	public static List<DepartmentJob> generateJobs(int departmentsCount, int jobsCount) {
+	public static List<DepartmentJob> generateJobs(int departmentsCount, int jobsCount, boolean generateDescription) {
 		if (departmentsCount <= 0 || jobsCount <= 0)
 			return Collections.emptyList(); // todo: think about logging these incorrect parameters
 
@@ -29,11 +29,14 @@ public class DepartmentJobGenerator
 		{
 			for (int j = 1; j <= jobsCount; j++)
 			{
-				jobs.add(generateJob(i, j));
+				jobs.add( generateJob(i, j, generateDescription) );
 			}
 		}
 
 		return jobs;
+	}
+	public static List<DepartmentJob> generateJobs(int departmentsCount, int jobsCount) {
+		return generateJobs(departmentsCount, jobsCount, true);
 	}
 
 	public static DepartmentJob generateJob(int departmentNumber, int jobNumber, String description) {
