@@ -1,0 +1,24 @@
+<departmentJobs>
+	<departmentJob>
+		<departmentCode>Department 1</departmentCode>
+
+		<jobName>Job 1</jobName>
+
+		<!-- incorrect description element with multiple child elements -->
+		<description>
+			Comment for Job number 1 in Department number 1
+			<wrongTag>myTag</wrongTag>
+		</description>
+
+	</departmentJob>
+	<departmentJob>
+		<departmentCode>Department 1</departmentCode>
+		<jobName>Job 2</jobName>
+		<description>Comment for Job number 2 in Department number 1</description>
+	</departmentJob>
+	<departmentJob>
+		<departmentCode>Department 1</departmentCode>
+		<jobName>Job 3</jobName>
+		<description>Comment for Job number 3 in Department number 1</description>
+	</departmentJob>
+</departmentJobs>

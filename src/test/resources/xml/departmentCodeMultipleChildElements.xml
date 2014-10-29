@@ -1,0 +1,23 @@
+<departmentJobs>
+	<departmentJob>
+
+		<!-- incorrect departmentCode element -->
+		<departmentCode>
+			Department 1
+			<wrongTag>myTag</wrongTag>
+		</departmentCode>
+
+		<jobName>Job 1</jobName>
+		<description>Comment for Job number 1 in Department number 1</description>
+	</departmentJob>
+	<departmentJob>
+		<departmentCode>Department 1</departmentCode>
+		<jobName>Job 2</jobName>
+		<description>Comment for Job number 2 in Department number 1</description>
+	</departmentJob>
+	<departmentJob>
+		<departmentCode>Department 1</departmentCode>
+		<jobName>Job 3</jobName>
+		<description>Comment for Job number 3 in Department number 1</description>
+	</departmentJob>
+</departmentJobs>

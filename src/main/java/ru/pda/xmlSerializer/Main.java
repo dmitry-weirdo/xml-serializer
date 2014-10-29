@@ -7,6 +7,7 @@
  */
 package ru.pda.xmlSerializer;
 
+import org.apache.log4j.BasicConfigurator;
 import su.opencode.kefir.gen.helper.ObjectFiller;
 import su.opencode.kefir.util.ObjectUtils;
 
@@ -18,7 +19,9 @@ import java.util.List;
 
 public class Main
 {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IncorrectXmlFileException {
+		BasicConfigurator.configure();
+
 		System.out.println("arguments: " + Arrays.toString(args));
 		// todo: validate arguments
 
@@ -36,9 +39,31 @@ public class Main
 //		List<DepartmentJob> jobsToInsert = getJobs();
 		List<DepartmentJob> jobsToInsert = DepartmentJobGenerator.generateJobs(1000, 100);
 
+/*
 		System.out.println("time before insert:" + new Date() );
 		connector.insertJobs(connection, jobsToInsert);
 		System.out.println("time after insert:" + new Date() );
+*/
+
+		String xmlFileName = "c:\\java\\xmlSerializer\\jobs.xml";
+/*
+		DepartmentJobs jobsToSerialize = new DepartmentJobs();
+		jobsToSerialize.setJobs(jobsToInsert);
+		System.out.println( "serialized jobs size: " + jobsToSerialize.getJobs().size() );
+*/
+
+		XmlSerializer serializer = new XmlSerializer();
+/*
+		serializer.serializeToXml(jobsToSerialize, xmlFileName);
+
+		DepartmentJobs jobsFromXml = serializer.deserializeFromXml(xmlFileName);
+		System.out.println("deserialized jobs size (JAXB parser): " + jobsFromXml.getJobs().size());
+*/
+
+//		String xmlFileName1 = "c:\\java\\xmlSerializer\\jobs1.xml";
+		String xmlFileName1 = "C:\\java\\xmlSerializer\\src\\test\\resources\\xml\\departmentJobInnerElements.xml";
+		DepartmentJobs jobsFromXmlDom = serializer.deserializeFromXmlUsingDomParser(xmlFileName1);
+		System.out.println("deserialized jobs size (Xml DOM parser): " + jobsFromXmlDom.getJobs().size());
 	}
 
 	private static List<DepartmentJob> getJobs() {

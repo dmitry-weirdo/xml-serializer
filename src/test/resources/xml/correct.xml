@@ -1,0 +1,32 @@
+<departmentJobs> <!-- incorrect root tag name -->
+
+	<otherRootChild> <!-- other root child - does not really matter -->
+		<otherInnerTag>some text</otherInnerTag>
+	</otherRootChild>
+
+	<departmentJob>
+		<departmentCode>12345678901234567890</departmentCode> <!-- 20 chars - ok -->
+		<jobName>1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890</jobName> <!-- 100 chars - ok -->
+		<!-- no description - ok -->
+		<anotherTagDoesNotBotherMe>this value does not really matter</anotherTagDoesNotBotherMe> <!-- another inner tag - does not really matter -->
+	</departmentJob>
+
+	<departmentJob>
+		<departmentCode>   Department 1  </departmentCode> <!-- will be trimmed -->
+		<jobName>  Job 2  </jobName> <!-- will be trimmed -->
+		<description></description> <!-- empty comment - ok -->
+	</departmentJob>
+
+	<departmentJob>
+		<departmentCode>Department 1</departmentCode>
+		<jobName>Job 3</jobName>
+		<description>123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345</description> <!-- 255 chars - ok -->
+	</departmentJob>
+
+	<departmentJob>
+		<departmentCode>Department 1</departmentCode>
+		<jobName>Job 4</jobName>
+		<description>   desciption to trim </description> <!-- will be trimmed -->
+	</departmentJob>
+
+</departmentJobs>

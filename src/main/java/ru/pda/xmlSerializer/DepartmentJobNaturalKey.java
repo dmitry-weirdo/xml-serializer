@@ -23,7 +23,7 @@ public final class DepartmentJobNaturalKey
 		return new DepartmentJobNaturalKey(departmentCode, departmentJob);
 	}
 	public DepartmentJobNaturalKey getInstance(DepartmentJob job) {
-		return new DepartmentJobNaturalKey( job.getDepartmentCode(), job.getDepartmentJob() );
+		return new DepartmentJobNaturalKey( job.getDepartmentCode(), job.getJobName() );
 	}
 
 	@Override

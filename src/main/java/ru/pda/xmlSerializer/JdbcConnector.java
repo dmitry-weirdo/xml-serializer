@@ -30,7 +30,7 @@ public class JdbcConnector
 			for (DepartmentJob job : jobs)
 			{
 				insertStatement.setString(1, job.getDepartmentCode());
-				insertStatement.setString(2, job.getDepartmentJob());
+				insertStatement.setString(2, job.getJobName());
 				insertStatement.setString(3, job.getDescription());
 
 				insertStatement.addBatch();
