@@ -8,18 +8,31 @@
 package ru.pda.xmlSerializer;
 
 import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.Logger;
+import ru.pda.xmlSerializer.commandLine.BasicCommandArguments;
+import ru.pda.xmlSerializer.commandLine.Command;
+import ru.pda.xmlSerializer.commandLine.CommandArguments;
 import su.opencode.kefir.gen.helper.ObjectFiller;
 import su.opencode.kefir.util.ObjectUtils;
 
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 public class Main
 {
 	public static void main(String[] args) throws IncorrectXmlFileException, NonUniqueNaturalKeyException {
+		System.out.println("from null enum:" + Command.valueOf(null));
+
+/*
+		PropertiesConfig config = parsePropertiesConfig(); // файл свойств нужен для конфигурации логгера
+		configureLogger(config); // логгер может быть нужен для валидации аргументов командной строки
+		CommandArguments arguments = parseArguments(args);
+		executeCommand(arguments);
+*/
+
+
 		BasicConfigurator.configure();
 
 		System.out.println("arguments: " + Arrays.toString(args));
@@ -29,7 +42,7 @@ public class Main
 //		String propertiesFileName = "xmlSerializer.properties"; // todo: possibly get it from program arguments
 		String propertiesFileName = "C:\\java\\xmlSerializer-googleCode\\src\\main\\resources\\properties\\xmlSerializer.properties"; // todo: possibly get it from program arguments
 		PropertiesConfig config = ObjectFiller.createObject(propertiesFileName, PropertiesConfig.class);
-		System.out.println( "PropertiesConfig:\n" +  ObjectUtils.instanceToString(config) );
+		System.out.println("PropertiesConfig:\n" + ObjectUtils.instanceToString(config));
 
 		// todo: validate fields
 
@@ -69,6 +82,10 @@ public class Main
 		System.out.println("HashMap created successfully");
 	}
 
+	private CommandArguments parseArguments(String[] arguments) {
+		return BasicCommandArguments.parseArgumentsDependingOnCommand(arguments);
+	}
+
 	private static List<DepartmentJob> getJobs() {
 		List<DepartmentJob> jobs = new ArrayList<>();
 
@@ -81,4 +98,7 @@ public class Main
 
 		return jobs;
 	}
+
+	private StringBuffer sb = new StringBuffer();
+	private static final Logger logger = Logger.getLogger(JdbcConnector.class);
 }

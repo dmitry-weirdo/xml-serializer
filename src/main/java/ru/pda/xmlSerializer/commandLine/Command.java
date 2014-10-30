@@ -5,7 +5,7 @@
  $Revision$
  $Date::                      $
  */
-package ru.pda.xmlSerializer;
+package ru.pda.xmlSerializer.commandLine;
 
 /**
  * Команда, выполняемая main-классом приложения.
@@ -29,4 +29,6 @@ public enum Command
 	 * Импортировать данные из&nbsp;xml-файла в&nbsp;базу данных.
 	 */
 	IMPORT_DATA_FROM_XML,
+
+	// todo: help command that displays all the expected formats and possible commands
 }
