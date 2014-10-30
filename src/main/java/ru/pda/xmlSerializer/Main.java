@@ -12,6 +12,8 @@ import org.apache.log4j.Logger;
 import ru.pda.xmlSerializer.commandLine.BasicCommandArguments;
 import ru.pda.xmlSerializer.commandLine.Command;
 import ru.pda.xmlSerializer.commandLine.CommandArguments;
+import ru.pda.xmlSerializer.propertiesConfig.IncorrectPropertiesFileException;
+import ru.pda.xmlSerializer.propertiesConfig.PropertiesConfig;
 import su.opencode.kefir.gen.helper.ObjectFiller;
 import su.opencode.kefir.util.ObjectUtils;
 
@@ -82,6 +84,9 @@ public class Main
 		System.out.println("HashMap created successfully");
 	}
 
+	private PropertiesConfig parsePropertiesConfig() throws IncorrectPropertiesFileException {
+		return PropertiesConfig.parseFromPropertiesFile(PROPERTIES_CONFIG_FILE_NAME);
+	}
 	private CommandArguments parseArguments(String[] arguments) {
 		return BasicCommandArguments.parseArgumentsDependingOnCommand(arguments);
 	}
@@ -101,4 +106,6 @@ public class Main
 
 	private StringBuffer sb = new StringBuffer();
 	private static final Logger logger = Logger.getLogger(JdbcConnector.class);
+
+	public static final String PROPERTIES_CONFIG_FILE_NAME = "xmlSerializer.properties";
 }

@@ -8,6 +8,7 @@
 package ru.pda.xmlSerializer;
 
 import org.apache.log4j.Logger;
+import ru.pda.xmlSerializer.propertiesConfig.PropertiesConfig;
 import su.opencode.kefir.util.StringUtils;
 
 import java.sql.*;
