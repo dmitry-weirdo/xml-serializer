@@ -16,6 +16,10 @@ import static org.junit.Assert.assertEquals;
 public class PropertiesConfigTest
 {
 	@Test(expected = IncorrectPropertiesFileException.class)
+	public void testNonExistingPropertiesFile() throws IncorrectPropertiesFileException {
+		PropertiesConfig.parseFromPropertiesFile("nonExistingFile.properties");
+	}
+	@Test(expected = IncorrectPropertiesFileException.class)
 	public void testNonValidPropertiesFile() throws IncorrectPropertiesFileException {
 		parseProjectConfig("/propertiesConfig/nonValid.properties");
 	}

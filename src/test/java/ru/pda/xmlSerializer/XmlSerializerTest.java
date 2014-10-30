@@ -25,6 +25,11 @@ public class XmlSerializerTest
 	}
 
 	@Test(expected = IncorrectXmlFileException.class)
+	public void testNonExistingFile() throws IncorrectXmlFileException {
+		XmlSerializer serializer = new XmlSerializer();
+		serializer.deserializeFromXmlUsingDomParser("nonExistingFile.xml");
+	}
+	@Test(expected = IncorrectXmlFileException.class)
 	public void testEmptyXmlFile() throws IncorrectXmlFileException {
 		serializeResource("/xml/empty.xml");
 	}
