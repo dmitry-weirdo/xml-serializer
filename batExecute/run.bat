@@ -1,0 +1,1 @@
+"%java_home%\bin\java" -cp ".\*;.\lib\*" ru.pda.xmlSerializer.Main INSERT_TEST_DATA 100 10
