@@ -7,35 +7,42 @@
  */
 package ru.pda.xmlSerializer;
 
-import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
-import ru.pda.xmlSerializer.commandLine.BasicCommandArguments;
-import ru.pda.xmlSerializer.commandLine.Command;
-import ru.pda.xmlSerializer.commandLine.CommandArguments;
+import ru.pda.xmlSerializer.commandExecutor.InsertTestDataCommandExecutor;
+import ru.pda.xmlSerializer.commandLine.*;
+import ru.pda.xmlSerializer.jdbc.JdbcConnector;
+import ru.pda.xmlSerializer.jdbc.JdbcDriverRegisterFailException;
 import ru.pda.xmlSerializer.loggerConfig.LoggerConfigurator;
 import ru.pda.xmlSerializer.loggerConfig.LoggerConfiguringException;
 import ru.pda.xmlSerializer.propertiesConfig.IncorrectPropertiesFileException;
 import ru.pda.xmlSerializer.propertiesConfig.PropertiesConfig;
-import su.opencode.kefir.gen.helper.ObjectFiller;
+import ru.pda.xmlSerializer.xml.IncorrectXmlFileException;
+import ru.pda.xmlSerializer.xml.XmlSerializer;
 import su.opencode.kefir.util.ObjectUtils;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static su.opencode.kefir.util.StringUtils.concat;
+
 public class Main
 {
-	public static void main(String[] args) throws IncorrectXmlFileException, NonUniqueNaturalKeyException, LoggerConfiguringException, IncorrectPropertiesFileException {
+	public static void main(String[] args) throws IncorrectXmlFileException, NonUniqueNaturalKeyException, LoggerConfiguringException, IncorrectPropertiesFileException, JdbcDriverRegisterFailException, SQLException {
 		PropertiesConfig config = parsePropertiesConfig(); // файл свойств нужен для конфигурации логгера
 		configureLogger(config); // логгер может быть нужен для валидации аргументов командной строки
 		CommandArguments arguments = parseArguments(args);
-//		executeCommand(arguments);
+		executeCommand(arguments, config);
+
+		if (true)
+			return;
 
 		logger.info("From null enum");
 
 
-		BasicConfigurator.configure();
+//		BasicConfigurator.configure();
 
 		System.out.println("arguments: " + Arrays.toString(args));
 		// todo: validate arguments
@@ -92,6 +99,27 @@ public class Main
 	}
 	private static CommandArguments parseArguments(String[] arguments) {
 		return BasicCommandArguments.parseArgumentsDependingOnCommand(arguments);
+	}
+
+	private static void executeCommand(CommandArguments arguments, PropertiesConfig config) throws JdbcDriverRegisterFailException, SQLException {
+		switch (arguments.getCommand())
+		{
+			case INSERT_TEST_DATA:
+				InsertTestDataCommandArguments insertTestDataArguments = (InsertTestDataCommandArguments) arguments;
+				new InsertTestDataCommandExecutor().execute(insertTestDataArguments, config);
+				break;
+
+			case EXPORT_DATA_TO_XML:
+				ExportDataCommandArguments exportDataCommandArguments = (ExportDataCommandArguments) arguments;
+				break;
+
+			case IMPORT_DATA_FROM_XML:
+				ImportDataCommandArguments importDataCommandArguments = (ImportDataCommandArguments) arguments;
+				break;
+
+			default:
+				throw new IllegalArgumentException(concat("Unknown command: \"", arguments.getCommand(), "\""));
+		}
 	}
 
 	private static List<DepartmentJob> getJobs() {

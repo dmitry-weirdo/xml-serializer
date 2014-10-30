@@ -5,7 +5,7 @@
  $Revision$
  $Date::                      $
  */
-package ru.pda.xmlSerializer;
+package ru.pda.xmlSerializer.jdbc;
 
 import static su.opencode.kefir.util.StringUtils.concat;
 
@@ -26,7 +26,7 @@ public class QueryConstructor
 				, ")"
 				, " values"
 				, "("
-					,  " gen_id(", DEPARTMENT_JOB_GENERATOR_NAME, ", 1)" // id // firebird specific generation, not very good
+					,  " gen_id(", DEPARTMENT_JOB_GENERATOR_NAME, ", 1)" // id // Firebird-specific generation, not very good
 					, ", ?" // department_code
 					, ", ?" // department_job
 					, ", ?" // description
@@ -59,8 +59,12 @@ public class QueryConstructor
 			, " where ", DEPARTMENT_JOB_ID_COLUMN_NAME, " = ?"
 		);
 	}
+	public static String getDeleteAllQuery() {
+		return concat( // do not use table aliases to conform to standard SQL queries
+			  "delete from ", DEPARTMENT_JOB_TABLE_NAME
+		);
+	}
 	// todo: delete by 'in' by list of ids query
-
 
 
 	public static final String DEPARTMENT_JOB_TABLE_NAME = "Department_job";

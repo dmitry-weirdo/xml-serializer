@@ -5,7 +5,7 @@
  $Revision$
  $Date::                      $
  */
-package ru.pda.xmlSerializer;
+package ru.pda.xmlSerializer.xml;
 
 import org.apache.log4j.Logger;
 import org.w3c.dom.Document;
@@ -13,6 +13,9 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+import ru.pda.xmlSerializer.DepartmentJob;
+import ru.pda.xmlSerializer.DepartmentJobs;
+import ru.pda.xmlSerializer.jdbc.JdbcConnector;
 import su.opencode.kefir.util.FileUtils;
 import su.opencode.kefir.util.JaxbHelper;
 import su.opencode.kefir.util.ObjectUtils;

@@ -5,9 +5,10 @@
  $Revision$
  $Date::                      $
  */
-package ru.pda.xmlSerializer;
+package ru.pda.xmlSerializer.jdbc;
 
 import org.apache.log4j.Logger;
+import ru.pda.xmlSerializer.DepartmentJob;
 import ru.pda.xmlSerializer.propertiesConfig.PropertiesConfig;
 import su.opencode.kefir.util.StringUtils;
 

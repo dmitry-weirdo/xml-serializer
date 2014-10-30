@@ -5,7 +5,7 @@
  $Revision$
  $Date::                      $
  */
-package ru.pda.xmlSerializer;
+package ru.pda.xmlSerializer.xml;
 
 /**
  * Исключение, выбрасываемое в&nbsp;случае, когда структура сериализованного xml-файла не&nbsp;является корректной.

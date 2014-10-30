@@ -42,6 +42,7 @@ public class DepartmentJobGenerator
 	public static DepartmentJob generateJob(int departmentNumber, int jobNumber, String description) {
 		StringBuilder sb = new StringBuilder();
 		String departmentCode = concat(sb, "Department ", departmentNumber);
+//		String departmentCode = concat(sb, "Department super mega very greatly long", departmentNumber); // uncomment this to test rolling back the transaction (no records would be inserted or deleted)
 		String departmentJob = concat(sb, "Job ", jobNumber);
 
 		return new DepartmentJob(departmentCode, departmentJob, description);

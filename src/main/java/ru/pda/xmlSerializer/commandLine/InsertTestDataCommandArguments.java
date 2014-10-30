@@ -58,6 +58,13 @@ public class InsertTestDataCommandArguments extends BasicCommandArguments
 		return this;
 	}
 
+	public boolean isValid() {
+		return
+			   (departmentsCount >= MIN_DEPARTMENTS_COUNT) && (departmentsCount <= MAX_DEPARTMENTS_COUNT)
+			&& (jobsCount >= MIN_JOBS_COUNT) && (jobsCount <= MAX_JOBS_COUNT)
+		;
+	}
+
 	public int getDepartmentsCount() {
 		return departmentsCount;
 	}

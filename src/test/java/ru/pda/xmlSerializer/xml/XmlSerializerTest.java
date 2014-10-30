@@ -5,11 +5,13 @@
  $Revision$
  $Date::                      $
  */
-package ru.pda.xmlSerializer;
+package ru.pda.xmlSerializer.xml;
 
 import org.apache.log4j.BasicConfigurator;
 import org.junit.Before;
 import org.junit.Test;
+import ru.pda.xmlSerializer.DepartmentJob;
+import ru.pda.xmlSerializer.DepartmentJobs;
 import su.opencode.kefir.util.ObjectUtils;
 
 import java.net.URL;
