@@ -8,7 +8,7 @@
 package ru.pda.xmlSerializer;
 
 /**
- * Parameter-object, хранящий в&nbsp;себе конфигурационные данные, считываемые из properties-файла настроек.
+ * Parameter-object, хранящий в&nbsp;себе конфигурационные данные, считываемые из&nbsp;properties-файла настроек.
  */
 public class PropertiesConfig
 {
@@ -36,6 +36,12 @@ public class PropertiesConfig
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	public String getLogFileName() {
+		return logFileName;
+	}
+	public void setLogFileName(String logFileName) {
+		this.logFileName = logFileName;
+	}
 
 	/**
 	 * JDBC-url для&nbsp;подключения к базе данных.
@@ -56,4 +62,9 @@ public class PropertiesConfig
 	 * Пароль для&nbsp;подключения к&nbsp;базе данных.
 	 */
 	private String password;
+
+	/**
+	 * Имя файла (полное или&nbsp;относительное), в&nbsp;который выполняется логирование.
+	 */
+	private String logFileName;
 }

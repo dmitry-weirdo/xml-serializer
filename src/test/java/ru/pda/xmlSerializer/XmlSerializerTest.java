@@ -152,7 +152,7 @@ public class XmlSerializerTest
 		assertNull( job3.getId() );
 		assertEquals("Department 1", job3.getDepartmentCode());
 		assertEquals("Job 4", job3.getJobName());
-		assertEquals("desciption to trim", job3.getDescription());
+		assertEquals("description to trim", job3.getDescription());
 	}
 
 

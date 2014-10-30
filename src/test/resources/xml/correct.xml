@@ -26,7 +26,7 @@
 	<departmentJob>
 		<departmentCode>Department 1</departmentCode>
 		<jobName>Job 4</jobName>
-		<description>   desciption to trim </description> <!-- will be trimmed -->
+		<description>   description to trim </description> <!-- will be trimmed -->
 	</departmentJob>
 
 </departmentJobs>

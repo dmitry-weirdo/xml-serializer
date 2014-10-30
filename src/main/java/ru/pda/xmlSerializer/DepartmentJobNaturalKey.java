@@ -14,15 +14,15 @@ package ru.pda.xmlSerializer;
  */
 public final class DepartmentJobNaturalKey
 {
-	private DepartmentJobNaturalKey(String departmentCode, String departmentJob) {
+	private DepartmentJobNaturalKey(String departmentCode, String jobName) {
 		this.departmentCode = departmentCode;
-		this.departmentJob = departmentJob;
+		this.jobName = jobName;
 	}
 
-	public DepartmentJobNaturalKey getInstance(String departmentCode, String departmentJob) {
+	public static DepartmentJobNaturalKey getInstance(String departmentCode, String departmentJob) {
 		return new DepartmentJobNaturalKey(departmentCode, departmentJob);
 	}
-	public DepartmentJobNaturalKey getInstance(DepartmentJob job) {
+	public static DepartmentJobNaturalKey getInstance(DepartmentJob job) {
 		return new DepartmentJobNaturalKey( job.getDepartmentCode(), job.getJobName() );
 	}
 
@@ -34,14 +34,14 @@ public final class DepartmentJobNaturalKey
 		DepartmentJobNaturalKey that = (DepartmentJobNaturalKey) o;
 
 		if (!departmentCode.equals(that.departmentCode)) return false;
-		if (!departmentJob.equals(that.departmentJob)) return false;
+		if (!jobName.equals(that.jobName)) return false;
 
 		return true;
 	}
 	@Override
 	public int hashCode() {
 		int result = departmentCode.hashCode();
-		result = 31 * result + departmentJob.hashCode();
+		result = 31 * result + jobName.hashCode();
 		return result;
 	}
 
@@ -53,7 +53,7 @@ public final class DepartmentJobNaturalKey
 
 	/**
 	 * Название должости в&nbsp;отделе.
-	 * @see DepartmentJob#departmentJob
+	 * @see DepartmentJob#jobName
 	 */
-	private final String departmentJob;
+	private final String jobName;
 }

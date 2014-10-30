@@ -19,7 +19,7 @@ import java.util.List;
 
 public class Main
 {
-	public static void main(String[] args) throws IncorrectXmlFileException {
+	public static void main(String[] args) throws IncorrectXmlFileException, NonUniqueNaturalKeyException {
 		BasicConfigurator.configure();
 
 		System.out.println("arguments: " + Arrays.toString(args));
@@ -27,7 +27,7 @@ public class Main
 
 		// read data from properties file
 //		String propertiesFileName = "xmlSerializer.properties"; // todo: possibly get it from program arguments
-		String propertiesFileName = "C:\\java\\xmlSerializer\\src\\main\\resources\\properties\\xmlSerializer.properties"; // todo: possibly get it from program arguments
+		String propertiesFileName = "C:\\java\\xmlSerializer-googleCode\\src\\main\\resources\\properties\\xmlSerializer.properties"; // todo: possibly get it from program arguments
 		PropertiesConfig config = ObjectFiller.createObject(propertiesFileName, PropertiesConfig.class);
 		System.out.println( "PropertiesConfig:\n" +  ObjectUtils.instanceToString(config) );
 
@@ -37,7 +37,7 @@ public class Main
 		Connection connection = connector.createConnection(config);
 
 //		List<DepartmentJob> jobsToInsert = getJobs();
-		List<DepartmentJob> jobsToInsert = DepartmentJobGenerator.generateJobs(1000, 100);
+		List<DepartmentJob> jobsToInsert = DepartmentJobGenerator.generateJobs(1000, 100, true);
 
 /*
 		System.out.println("time before insert:" + new Date() );
@@ -61,9 +61,12 @@ public class Main
 */
 
 //		String xmlFileName1 = "c:\\java\\xmlSerializer\\jobs1.xml";
-		String xmlFileName1 = "C:\\java\\xmlSerializer\\src\\test\\resources\\xml\\departmentJobInnerElements.xml";
-		DepartmentJobs jobsFromXmlDom = serializer.deserializeFromXmlUsingDomParser(xmlFileName1);
+//		String xmlFileName1 = "C:\\java\\xmlSerializer\\src\\test\\resources\\xml\\departmentJobInnerElements.xml";
+		DepartmentJobs jobsFromXmlDom = serializer.deserializeFromXmlUsingDomParser(xmlFileName);
 		System.out.println("deserialized jobs size (Xml DOM parser): " + jobsFromXmlDom.getJobs().size());
+
+		DepartmentJobMapUtils.createJobsMap(jobsFromXmlDom);
+		System.out.println("HashMap created successfully");
 	}
 
 	private static List<DepartmentJob> getJobs() {
