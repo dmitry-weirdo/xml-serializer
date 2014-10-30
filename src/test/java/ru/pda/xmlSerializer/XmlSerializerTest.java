@@ -10,6 +10,7 @@ package ru.pda.xmlSerializer;
 import org.apache.log4j.BasicConfigurator;
 import org.junit.Before;
 import org.junit.Test;
+import su.opencode.kefir.util.ObjectUtils;
 
 import java.net.URL;
 import java.util.List;
@@ -23,6 +24,10 @@ public class XmlSerializerTest
 		BasicConfigurator.configure();
 	}
 
+	@Test(expected = IncorrectXmlFileException.class)
+	public void testEmptyXmlFile() throws IncorrectXmlFileException {
+		serializeResource("/xml/empty.xml");
+	}
 	@Test(expected = IncorrectXmlFileException.class)
 	public void testIncorrectRootElement() throws IncorrectXmlFileException {
 		serializeResource("/xml/wrongRootTag.xml");
@@ -120,6 +125,13 @@ public class XmlSerializerTest
 		serializeResource("/xml/descriptionTooLong.xml");
 	}
 
+	@Test()
+	public void testNoJobsXml() throws IncorrectXmlFileException {
+		DepartmentJobs departmentJobs = serializeResource("/xml/noJobs.xml");
+		assertNotNull(departmentJobs);
+
+		assertTrue( ObjectUtils.empty(departmentJobs.getJobs()) );
+	}
 
 	@Test()
 	public void testCorrectXml() throws IncorrectXmlFileException {

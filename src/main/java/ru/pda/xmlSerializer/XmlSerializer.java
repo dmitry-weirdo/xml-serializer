@@ -225,20 +225,10 @@ public class XmlSerializer
 			result.setJobs(jobs);
 			return result;
 		}
-		catch (ParserConfigurationException e)
+
+		catch (ParserConfigurationException | SAXException | IOException e)
 		{
-			e.printStackTrace();  // todo: handle exception
-			throw new RuntimeException(e);
-		}
-		catch (SAXException e)
-		{
-			e.printStackTrace();  // todo: handle exception
-			throw new RuntimeException(e);
-		}
-		catch (IOException e)
-		{
-			e.printStackTrace();  // todo: handle exception
-			throw new RuntimeException(e);
+			throw new IncorrectXmlFileException(e);
 		}
 	}
 
