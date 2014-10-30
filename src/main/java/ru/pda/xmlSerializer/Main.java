@@ -12,6 +12,8 @@ import org.apache.log4j.Logger;
 import ru.pda.xmlSerializer.commandLine.BasicCommandArguments;
 import ru.pda.xmlSerializer.commandLine.Command;
 import ru.pda.xmlSerializer.commandLine.CommandArguments;
+import ru.pda.xmlSerializer.loggerConfig.LoggerConfigurator;
+import ru.pda.xmlSerializer.loggerConfig.LoggerConfiguringException;
 import ru.pda.xmlSerializer.propertiesConfig.IncorrectPropertiesFileException;
 import ru.pda.xmlSerializer.propertiesConfig.PropertiesConfig;
 import su.opencode.kefir.gen.helper.ObjectFiller;
@@ -24,15 +26,13 @@ import java.util.List;
 
 public class Main
 {
-	public static void main(String[] args) throws IncorrectXmlFileException, NonUniqueNaturalKeyException {
-		System.out.println("from null enum:" + Command.valueOf(null));
-
-/*
+	public static void main(String[] args) throws IncorrectXmlFileException, NonUniqueNaturalKeyException, LoggerConfiguringException, IncorrectPropertiesFileException {
 		PropertiesConfig config = parsePropertiesConfig(); // файл свойств нужен для конфигурации логгера
 		configureLogger(config); // логгер может быть нужен для валидации аргументов командной строки
 		CommandArguments arguments = parseArguments(args);
-		executeCommand(arguments);
-*/
+//		executeCommand(arguments);
+
+		logger.info("From null enum");
 
 
 		BasicConfigurator.configure();
@@ -43,7 +43,7 @@ public class Main
 		// read data from properties file
 //		String propertiesFileName = "xmlSerializer.properties"; // todo: possibly get it from program arguments
 		String propertiesFileName = "C:\\java\\xmlSerializer-googleCode\\src\\main\\resources\\properties\\xmlSerializer.properties"; // todo: possibly get it from program arguments
-		PropertiesConfig config = ObjectFiller.createObject(propertiesFileName, PropertiesConfig.class);
+//		PropertiesConfig config = ObjectFiller.createObject(propertiesFileName, PropertiesConfig.class);
 		System.out.println("PropertiesConfig:\n" + ObjectUtils.instanceToString(config));
 
 		// todo: validate fields
@@ -84,10 +84,13 @@ public class Main
 		System.out.println("HashMap created successfully");
 	}
 
-	private PropertiesConfig parsePropertiesConfig() throws IncorrectPropertiesFileException {
+	private static PropertiesConfig parsePropertiesConfig() throws IncorrectPropertiesFileException {
 		return PropertiesConfig.parseFromPropertiesFile(PROPERTIES_CONFIG_FILE_NAME);
 	}
-	private CommandArguments parseArguments(String[] arguments) {
+	private static void configureLogger(PropertiesConfig config) throws LoggerConfiguringException {
+		LoggerConfigurator.configureLogger(config);
+	}
+	private static CommandArguments parseArguments(String[] arguments) {
 		return BasicCommandArguments.parseArgumentsDependingOnCommand(arguments);
 	}
 
@@ -105,7 +108,7 @@ public class Main
 	}
 
 	private StringBuffer sb = new StringBuffer();
-	private static final Logger logger = Logger.getLogger(JdbcConnector.class);
+	private static final Logger logger = Logger.getLogger(Main.class);
 
 	public static final String PROPERTIES_CONFIG_FILE_NAME = "xmlSerializer.properties";
 }
