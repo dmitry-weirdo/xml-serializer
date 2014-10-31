@@ -1,0 +1,46 @@
+<departmentJobs>
+
+		<!-- stays the same -->
+    <departmentJob>
+        <departmentCode>Department 1</departmentCode>
+        <jobName>Job 1</jobName>
+        <description>Comment for Job number 1 in Department number 1</description>
+    </departmentJob>
+
+		<!-- changes description -->
+    <departmentJob>
+        <departmentCode>Department 2</departmentCode>
+        <jobName>Job 1</jobName>
+        <description>Changed comment for Job number 1 in Department number 2</description>
+    </departmentJob>
+
+	<!-- changes description to null -->
+    <departmentJob>
+        <departmentCode>Department 3</departmentCode>
+        <jobName>Job 1</jobName>
+        <!--<description>Comment for Job number 1 in Department number 3</description>-->
+    </departmentJob>
+
+		<!-- is removed -->
+<!--
+    <departmentJob>
+        <departmentCode>Department 4</departmentCode>
+        <jobName>Job 1</jobName>
+        <description>Comment for Job number 1 in Department number 4</description>
+    </departmentJob>
+-->
+
+<!-- new record with description -->
+	<departmentJob>
+		<departmentCode>Department 5</departmentCode>
+		<jobName>Job 1</jobName>
+		<description>Newly inserted record from xml</description>
+	</departmentJob>
+
+<!-- new record with no description -->
+	<departmentJob>
+		<departmentCode>Department 6</departmentCode>
+		<jobName>Job 1</jobName>
+	</departmentJob>
+
+</departmentJobs>

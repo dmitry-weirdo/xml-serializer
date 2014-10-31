@@ -1,0 +1,22 @@
+<departmentJobs>
+    <departmentJob>
+        <departmentCode>Department 1</departmentCode>
+        <jobName>Job 1</jobName>
+        <description>Comment for Job number 1 in Department number 1</description>
+    </departmentJob>
+    <departmentJob>
+        <departmentCode>Department 2</departmentCode>
+        <jobName>Job 1</jobName>
+        <description>Comment for Job number 1 in Department number 2</description>
+    </departmentJob>
+    <departmentJob>
+        <departmentCode>Department 3</departmentCode>
+        <jobName>Job 1</jobName>
+        <description>Comment for Job number 1 in Department number 3</description>
+    </departmentJob>
+    <departmentJob>
+        <departmentCode>Department 4</departmentCode>
+        <jobName>Job 1</jobName>
+        <description>Comment for Job number 1 in Department number 4</description>
+    </departmentJob>
+</departmentJobs>
