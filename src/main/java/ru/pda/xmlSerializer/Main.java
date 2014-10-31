@@ -9,6 +9,7 @@ package ru.pda.xmlSerializer;
 
 import org.apache.log4j.Logger;
 import ru.pda.xmlSerializer.commandExecutor.ExportDataCommandExecutor;
+import ru.pda.xmlSerializer.commandExecutor.ImportDataCommandExecutor;
 import ru.pda.xmlSerializer.commandExecutor.InsertTestDataCommandExecutor;
 import ru.pda.xmlSerializer.commandLine.*;
 import ru.pda.xmlSerializer.jdbc.JdbcConnector;
@@ -103,7 +104,7 @@ public class Main
 		return BasicCommandArguments.parseArgumentsDependingOnCommand(arguments);
 	}
 
-	private static void executeCommand(CommandArguments arguments, PropertiesConfig config) throws JdbcDriverRegisterFailException, SQLException, SerializeToXmlFileException {
+	private static void executeCommand(CommandArguments arguments, PropertiesConfig config) throws JdbcDriverRegisterFailException, SQLException, SerializeToXmlFileException, NonUniqueNaturalKeyException, IncorrectXmlFileException {
 		switch (arguments.getCommand())
 		{
 			case INSERT_TEST_DATA:
@@ -118,6 +119,7 @@ public class Main
 
 			case IMPORT_DATA_FROM_XML:
 				ImportDataCommandArguments importDataCommandArguments = (ImportDataCommandArguments) arguments;
+				new ImportDataCommandExecutor().execute(importDataCommandArguments, config);
 				break;
 
 			default:
@@ -142,4 +144,5 @@ public class Main
 	private static final Logger logger = Logger.getLogger(Main.class);
 
 	public static final String PROPERTIES_CONFIG_FILE_NAME = "xmlSerializer.properties";
+//	public static final String PROPERTIES_CONFIG_FILE_NAME = "C:\\java\\xmlSerializer-googleCode\\batExecute\\xmlSerializer.properties ";
 }

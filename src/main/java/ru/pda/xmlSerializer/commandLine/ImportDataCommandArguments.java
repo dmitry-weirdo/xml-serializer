@@ -36,6 +36,13 @@ public class ImportDataCommandArguments extends BasicCommandArguments
 		return this;
 	}
 
+	public boolean isValid() {
+		if ( StringUtils.emptyIfTrimmed(fileName) )
+			return false;
+
+		return true;
+	}
+
 	public String getFileName() {
 		return fileName;
 	}

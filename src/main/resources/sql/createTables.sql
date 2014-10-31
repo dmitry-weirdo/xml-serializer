@@ -5,12 +5,12 @@ create table Department_job (
 	, description     varchar(255)
 
 	, primary key(id)
-	, constraint department_job_unique_nk unique (department_code, department_job) using index deparment_job_natural_key_idx
+	, constraint department_job_unique_nk unique (department_code, department_job) using index department_job_natural_key_idx
 );
 
 create generator department_job_gen;
 set generator department_job_gen to 0;
 
--- create index deparment_job_natural_key_idx on Department_job(department_code, department_job);
+-- create index department_job_natural_key_idx on Department_job(department_code, department_job);
 
 commit;

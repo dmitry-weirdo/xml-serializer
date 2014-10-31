@@ -37,4 +37,10 @@ public interface CommandArguments
 	 * @throws IllegalArgumentException если переданные аргументы некорректны.
 	 */
 	CommandArguments parseArguments(String[] arguments) throws IllegalArgumentException;
+
+	/**
+	 * Выполняет проверку внутреннего состояния считанных аргументов.
+	 * @return <code>true</code> &mdash; если все считанные аргументы валидны, <code>false</code> &mdash; в&nbsp;противном случае.
+	 */
+	boolean isValid();
 }

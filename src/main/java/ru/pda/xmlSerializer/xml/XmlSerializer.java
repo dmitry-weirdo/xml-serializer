@@ -56,6 +56,11 @@ public class XmlSerializer
 
 	public DepartmentJobs deserializeFromXml(String fileName) throws IncorrectXmlFileException {
 		DepartmentJobs departmentJobs = JaxbHelper.jaxbObjectFromFile(DepartmentJobs.class, fileName);
+
+		// prevent NPE failing in case of no departmentJob element inside root element
+		if (departmentJobs.getJobs() == null)
+			departmentJobs.setJobs( new ArrayList<DepartmentJob>() );
+
 		validateJobs(departmentJobs);
 
 		return departmentJobs; // much better than DOM parsing, but the task is to do DOM parsing
@@ -173,7 +178,7 @@ public class XmlSerializer
 					}
 					else if ( descriptionNodes.getLength() > 1 )
 					{
-						throw new IncorrectXmlFileException( concat(sb, "Incorrect quantity of \"", DepartmentJob.DESCRIPTION_XML_ELEMENT_NAME, "\" elements in \"", DepartmentJobs.DEPARTMENT_JOB_XML_ELEMENT_NAME, "\" element: ", jobNameNodes.getLength(), " (expected 0 or 1)") );
+						throw new IncorrectXmlFileException( concat(sb, "Incorrect quantity of \"", DepartmentJob.DESCRIPTION_XML_ELEMENT_NAME, "\" elements in \"", DepartmentJobs.DEPARTMENT_JOB_XML_ELEMENT_NAME, "\" element: ", descriptionNodes.getLength(), " (expected 0 or 1)") );
 					}
 					else
 					{ // non-empty description

@@ -30,7 +30,7 @@ public class SelectDataToExportExecutor extends JdbcTransactionExecutor
 		selectStatement = connection.createStatement();
 
 		String query = QueryConstructor.getSelectWithNoIdQuery();
-		logger.info( concat("Select DeparmentJobs to export query: ", query) );
+		logger.info( concat("Select DepartmentJobs to export query: ", query) );
 		selectStatementResultSet = selectStatement.executeQuery(query);
 
 		selectedJobs = new ArrayList<>();

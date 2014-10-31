@@ -79,6 +79,26 @@ public class DepartmentJob
 		return true;
 	}
 
+	public static boolean haveSameDescription(DepartmentJob job1, DepartmentJob job2) {
+		if (job1 == null || job2 == null)
+			throw new IllegalArgumentException("Neither job1 nor job2 can be null");
+
+		String description1 = job1.getDescription();
+		String description2 = job2.getDescription();
+
+		if (description1 == null)
+		{
+			return (description2 == null);
+		}
+
+		if (description2 == null)
+		{
+			return false;
+		}
+
+		return description1.equals(description2);
+	}
+
 	@Override
 	public String toString() {
 		return StringUtils.concat(

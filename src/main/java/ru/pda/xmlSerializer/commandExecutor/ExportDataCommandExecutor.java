@@ -41,5 +41,5 @@ public class ExportDataCommandExecutor
 	}
 
 	private StringBuffer sb = new StringBuffer();
-	private static final Logger logger = Logger.getLogger(InsertTestDataCommandExecutor.class);
+	private static final Logger logger = Logger.getLogger(ExportDataCommandExecutor.class);
 }
