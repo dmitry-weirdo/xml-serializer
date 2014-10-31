@@ -15,7 +15,6 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 import ru.pda.xmlSerializer.DepartmentJob;
 import ru.pda.xmlSerializer.DepartmentJobs;
-import ru.pda.xmlSerializer.jdbc.JdbcConnector;
 import su.opencode.kefir.util.FileUtils;
 import su.opencode.kefir.util.JaxbHelper;
 import su.opencode.kefir.util.ObjectUtils;
@@ -289,5 +288,5 @@ public class XmlSerializer
 	}
 
 	private StringBuffer sb = new StringBuffer();
-	private static final Logger logger = Logger.getLogger(JdbcConnector.class);
+	private static final Logger logger = Logger.getLogger(XmlSerializer.class);
 }
