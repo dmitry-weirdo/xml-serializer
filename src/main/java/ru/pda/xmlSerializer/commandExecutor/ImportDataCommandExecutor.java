@@ -43,7 +43,7 @@ public class ImportDataCommandExecutor
 
 		ImportDataModifiedJobsCounts modifiedJobsCounts = importDataExecutor.getModifiedJobsCounts();
 		UserMessageLogger.log(logger, concat(sb
-			, jobs.size(), " DepartmentJob records from xml file \"", config.getFileName(), " successfully exported to database."
+			, jobs.size(), " DepartmentJob records from xml file \"", config.getFileName(), "\" successfully imported to database."
 			,  " ", modifiedJobsCounts.getInsertedJobsCount(), " records were inserted"
 			, ", ", modifiedJobsCounts.getUpdatedJobsCount(), " records were updated"
 			, ", ", modifiedJobsCounts.getDeletedJobsCount(), " records were deleted"
