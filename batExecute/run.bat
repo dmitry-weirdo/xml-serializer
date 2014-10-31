@@ -1,1 +1,2 @@
-"%java_home%\bin\java" -cp ".\*;.\lib\*" ru.pda.xmlSerializer.Main INSERT_TEST_DATA 100 10
+"%java_home%\bin\java" -cp ".\*;.\lib\*" ru.pda.xmlSerializer.Main INSERT_TEST_DATA 200 100
+"%java_home%\bin\java" -cp ".\*;.\lib\*" ru.pda.xmlSerializer.Main EXPORT_DATA_TO_XML "departmentJobsFromDB.xml"

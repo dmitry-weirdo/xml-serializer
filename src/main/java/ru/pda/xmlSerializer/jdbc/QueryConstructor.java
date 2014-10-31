@@ -42,7 +42,16 @@ public class QueryConstructor
 			, ", ", DEPARTMENT_JOB_DEPARTMENT_CODE_COLUMN_NAME
 			, ", ", DEPARTMENT_JOB_JOB_NAME_COLUMN_NAME
 			, ", ", DEPARTMENT_JOB_DESCRIPTION_COLUMN_NAME
-			, "from ", DEPARTMENT_JOB_TABLE_NAME
+			, " from ", DEPARTMENT_JOB_TABLE_NAME
+		); // no order by needed
+	}
+	public static String getSelectWithNoIdQuery() {
+		return concat(
+			  "select"
+			,  " ", DEPARTMENT_JOB_DEPARTMENT_CODE_COLUMN_NAME
+			, ", ", DEPARTMENT_JOB_JOB_NAME_COLUMN_NAME
+			, ", ", DEPARTMENT_JOB_DESCRIPTION_COLUMN_NAME
+			, " from ", DEPARTMENT_JOB_TABLE_NAME
 		); // no order by needed
 	}
 	public static String getUpdateByIdQuery() {

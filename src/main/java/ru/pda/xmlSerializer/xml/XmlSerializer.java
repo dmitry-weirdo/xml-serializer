@@ -33,15 +33,22 @@ import static su.opencode.kefir.util.StringUtils.concat;
 
 /**
  * Класс, выполняющий сериализацию и&nbsp;десериализацию должностей в&nbsp;отделе
- * в&nbsp;и&nbsp;из&nbsp;xml-файл.
+ * в&nbsp;xml-файл и&nbsp;из&nbsp;xml-файла.
  */
 public class XmlSerializer
 {
-	public void serializeToXml(DepartmentJobs jobs, String fileName) {
-		FileUtils.deleteFile(fileName);
-		JaxbHelper.jaxbObjectToFile(jobs, fileName);
+	public void serializeToXml(DepartmentJobs jobs, String fileName) throws SerializeToXmlFileException {
+		try
+		{
+			FileUtils.deleteFile(fileName);
+			JaxbHelper.jaxbObjectToFile(jobs, fileName);
+		}
+		catch (Exception e)
+		{
+			throw new SerializeToXmlFileException(e);
+		}
 	}
-	public void serializeToXml(List<DepartmentJob> jobs, String fileName) {
+	public void serializeToXml(List<DepartmentJob> jobs, String fileName) throws SerializeToXmlFileException {
 		DepartmentJobs departmentJobs = new DepartmentJobs();
 		departmentJobs.setJobs(jobs);
 		serializeToXml(departmentJobs, fileName);

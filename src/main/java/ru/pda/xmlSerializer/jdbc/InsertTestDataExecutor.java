@@ -17,6 +17,10 @@ import java.util.List;
 
 import static su.opencode.kefir.util.StringUtils.concat;
 
+/**
+ * Класс, выполняющий вставку заданных тестовых данных в таблицу должностей.
+ * Все существующие данные в&nbsp;таблице должностей удаляются.
+ */
 public class InsertTestDataExecutor extends JdbcTransactionExecutor
 {
 	public InsertTestDataExecutor(List<DepartmentJob> jobs) {

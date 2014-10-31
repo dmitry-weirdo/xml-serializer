@@ -8,6 +8,7 @@
 package ru.pda.xmlSerializer;
 
 import org.apache.log4j.Logger;
+import ru.pda.xmlSerializer.commandExecutor.ExportDataCommandExecutor;
 import ru.pda.xmlSerializer.commandExecutor.InsertTestDataCommandExecutor;
 import ru.pda.xmlSerializer.commandLine.*;
 import ru.pda.xmlSerializer.jdbc.JdbcConnector;
@@ -17,6 +18,7 @@ import ru.pda.xmlSerializer.loggerConfig.LoggerConfiguringException;
 import ru.pda.xmlSerializer.propertiesConfig.IncorrectPropertiesFileException;
 import ru.pda.xmlSerializer.propertiesConfig.PropertiesConfig;
 import ru.pda.xmlSerializer.xml.IncorrectXmlFileException;
+import ru.pda.xmlSerializer.xml.SerializeToXmlFileException;
 import ru.pda.xmlSerializer.xml.XmlSerializer;
 import su.opencode.kefir.util.ObjectUtils;
 
@@ -30,7 +32,7 @@ import static su.opencode.kefir.util.StringUtils.concat;
 
 public class Main
 {
-	public static void main(String[] args) throws IncorrectXmlFileException, NonUniqueNaturalKeyException, LoggerConfiguringException, IncorrectPropertiesFileException, JdbcDriverRegisterFailException, SQLException {
+	public static void main(String[] args) throws IncorrectXmlFileException, NonUniqueNaturalKeyException, LoggerConfiguringException, IncorrectPropertiesFileException, JdbcDriverRegisterFailException, SQLException, SerializeToXmlFileException {
 		PropertiesConfig config = parsePropertiesConfig(); // файл свойств нужен для конфигурации логгера
 		configureLogger(config); // логгер может быть нужен для валидации аргументов командной строки
 		CommandArguments arguments = parseArguments(args);
@@ -101,7 +103,7 @@ public class Main
 		return BasicCommandArguments.parseArgumentsDependingOnCommand(arguments);
 	}
 
-	private static void executeCommand(CommandArguments arguments, PropertiesConfig config) throws JdbcDriverRegisterFailException, SQLException {
+	private static void executeCommand(CommandArguments arguments, PropertiesConfig config) throws JdbcDriverRegisterFailException, SQLException, SerializeToXmlFileException {
 		switch (arguments.getCommand())
 		{
 			case INSERT_TEST_DATA:
@@ -111,6 +113,7 @@ public class Main
 
 			case EXPORT_DATA_TO_XML:
 				ExportDataCommandArguments exportDataCommandArguments = (ExportDataCommandArguments) arguments;
+				new ExportDataCommandExecutor().execute(exportDataCommandArguments, config);
 				break;
 
 			case IMPORT_DATA_FROM_XML:
