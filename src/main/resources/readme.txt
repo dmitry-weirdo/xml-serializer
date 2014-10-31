@@ -37,7 +37,7 @@
 Команда вставки тестовых данных INSERT_TEST_DATA _удалит все существующие в БД записи_!
 
 # Дополнительно
-Проекта на google-code (можно поднять исходники по SVN): https://code.google.com/p/xml-serializer/
+Проект на google-code (можно поднять исходники по SVN): https://code.google.com/p/xml-serializer/
 
 В некоторых местах в коде используются утилитные методы из моей библиотеки kefir, исходники которой также можно посмотреть на google-code: https://code.google.com/p/pda-kefir/
 
