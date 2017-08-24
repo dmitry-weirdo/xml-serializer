@@ -52,6 +52,6 @@ public class ImportDataCommandExecutor
 		) );
 	}
 
-	private StringBuffer sb = new StringBuffer();
+	private StringBuilder sb = new StringBuilder();
 	private static final Logger logger = Logger.getLogger(ImportDataCommandExecutor.class);
 }

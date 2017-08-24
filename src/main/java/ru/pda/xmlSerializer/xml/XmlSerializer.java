@@ -287,6 +287,6 @@ public class XmlSerializer
 		validateJobs( departmentJobs.getJobs() );
 	}
 
-	private StringBuffer sb = new StringBuffer();
+	private final StringBuilder sb = new StringBuilder();
 	private static final Logger logger = Logger.getLogger(XmlSerializer.class);
 }

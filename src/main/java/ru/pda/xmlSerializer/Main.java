@@ -83,5 +83,4 @@ public class Main
 	 * // todo: можно принимать его в аргументах командной строки
 	 */
 	public static final String PROPERTIES_CONFIG_FILE_NAME = "xmlSerializer.properties";
-//	public static final String PROPERTIES_CONFIG_FILE_NAME = "C:\\java\\xmlSerializer-googleCode\\batExecute\\xmlSerializer.properties ";
 }

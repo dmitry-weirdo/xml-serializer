@@ -35,6 +35,6 @@ public class InsertTestDataCommandExecutor
 		new InsertTestDataExecutor(jobs).processTransaction(propertiesConfig);
 	}
 
-	private final StringBuffer sb = new StringBuffer();
+	private final StringBuilder sb = new StringBuilder();
 	private static final Logger logger = Logger.getLogger(InsertTestDataCommandExecutor.class);
 }

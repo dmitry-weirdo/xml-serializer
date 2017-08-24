@@ -40,6 +40,6 @@ public class ExportDataCommandExecutor
 		UserMessageLogger.log(logger, concat(sb, jobs.size(), " DepartmentJob records successfully serialized to xml file \"", config.getFileName(), "\"") );
 	}
 
-	private final StringBuffer sb = new StringBuffer();
+	private final StringBuilder sb = new StringBuilder();
 	private static final Logger logger = Logger.getLogger(ExportDataCommandExecutor.class);
 }
