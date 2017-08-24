@@ -63,7 +63,7 @@ public class DepartmentJob
 	/**
 	 * Проверяет корректность заполнения должности: заполненность необходимых полей и&nbsp;их длину.
 	 * @return <code>true</code> &mdash; если сущность заполнена корректно;
-	 * <br/>
+	 * <br>
 	 * <code>false</code> &mdash; в&nbsp;противном случае.
 	 */
 	public boolean isValid() {

@@ -15,7 +15,7 @@ import static su.opencode.kefir.util.StringUtils.concat;
 public abstract class BasicCommandArguments implements CommandArguments
 {
 	@Override
-	public CommandArguments parseArguments(String[] arguments) throws IllegalArgumentException {
+	public CommandArguments parseArguments(String[] arguments) {
 		if ( arguments == null || arguments.length <= 0 )
 			throw new IllegalArgumentException( "No arguments passed" );
 
@@ -37,7 +37,7 @@ public abstract class BasicCommandArguments implements CommandArguments
 	 * @return разобранные параметры командой строки для&nbsp;той или&nbsp;иной команды.
 	 * @throws IllegalArgumentException если аргументы кома
 	 */
-	protected abstract CommandArguments parseCorrectArgumentsCount(String[] arguments) throws IllegalArgumentException;
+	protected abstract CommandArguments parseCorrectArgumentsCount(String[] arguments);
 
 	public static CommandArguments parseArgumentsDependingOnCommand(String[] arguments) {
 		if ( arguments == null || arguments.length <= 0 || arguments[0] == null )

@@ -17,8 +17,12 @@ import static su.opencode.kefir.util.StringUtils.concat;
  * Класс, генерирующий тестовые данные: заданное количество отделов,
  * в&nbsp;каждом из&nbsp;которых находится заданное количество должностей.
  */
-public class DepartmentJobGenerator
+public final class DepartmentJobGenerator
 {
+	private DepartmentJobGenerator() {
+		// private constructor for utils class
+	}
+
 	public static List<DepartmentJob> generateJobs(int departmentsCount, int jobsCount, boolean generateDescription) {
 		if (departmentsCount <= 0 || jobsCount <= 0)
 			return Collections.emptyList(); // todo: think about logging these incorrect parameters

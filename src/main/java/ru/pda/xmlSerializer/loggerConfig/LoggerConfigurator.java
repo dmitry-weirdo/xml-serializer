@@ -7,10 +7,7 @@
  */
 package ru.pda.xmlSerializer.loggerConfig;
 
-import org.apache.log4j.FileAppender;
-import org.apache.log4j.Logger;
-import org.apache.log4j.PatternLayout;
-import org.apache.log4j.Priority;
+import org.apache.log4j.*;
 import ru.pda.xmlSerializer.propertiesConfig.PropertiesConfig;
 import su.opencode.kefir.util.StringUtils;
 
@@ -21,8 +18,12 @@ import su.opencode.kefir.util.StringUtils;
  * Если имя файла логирования не&nbsp;указано, используется {@linkplain PropertiesConfig#DEFAULT_LOG_FILE_NAME имя файла по&nbsp;умолчанию}.
  * Остальные параметры логгера используются по&nbsp;умолчанию.
  */
-public class LoggerConfigurator
+public final class LoggerConfigurator
 {
+	private LoggerConfigurator() {
+		// private constructor for utils class
+	}
+
 	public static void configureLogger(PropertiesConfig config) throws LoggerConfiguringException {
 		configureLogger( config.getLogFileName() );
 	}
@@ -37,7 +38,7 @@ public class LoggerConfigurator
 			fileAppender.setName(FILE_APPENDER_NAME);
 			fileAppender.setFile(loggerFileName);
 			fileAppender.setAppend(true);
-			fileAppender.setThreshold(Priority.INFO);
+			fileAppender.setThreshold(Level.INFO);
 			fileAppender.activateOptions();
 			fileAppender.setLayout( new PatternLayout(PATTERN_LAYOUT) );
 

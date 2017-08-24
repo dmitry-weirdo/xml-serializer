@@ -16,8 +16,12 @@ import java.util.Map;
 
 import static su.opencode.kefir.util.StringUtils.concat;
 
-public class DepartmentJobMapUtils
+public final class DepartmentJobMapUtils
 {
+	private DepartmentJobMapUtils() {
+		// private constructor for utils class
+	}
+
 	public static Map<DepartmentJobNaturalKey, DepartmentJob> createJobsMap(DepartmentJobs departmentJobs) throws NonUniqueNaturalKeyException {
 		return createJobsMap( departmentJobs.getJobs() );
 	}

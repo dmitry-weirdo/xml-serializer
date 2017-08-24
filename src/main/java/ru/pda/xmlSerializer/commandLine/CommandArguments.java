@@ -36,7 +36,7 @@ public interface CommandArguments
 	 * @return объект, хранящий параметры командной строки
 	 * @throws IllegalArgumentException если переданные аргументы некорректны.
 	 */
-	CommandArguments parseArguments(String[] arguments) throws IllegalArgumentException;
+	CommandArguments parseArguments(String[] arguments);
 
 	/**
 	 * Выполняет проверку внутреннего состояния считанных аргументов.

@@ -16,8 +16,12 @@ import static su.opencode.kefir.util.StringUtils.concat;
  * на&nbsp;другой в&nbsp;одном месте.
  * В&nbsp;текущей реализации просто выдает сообщения в&nbsp;консоль.
  */
-public class UserMessageLogger
+public final class UserMessageLogger
 {
+	private UserMessageLogger() {
+		// private constructor for utils class
+	}
+
 	public static void log(Logger logger, String message) {
 		logger.info(message);
 		log(message);

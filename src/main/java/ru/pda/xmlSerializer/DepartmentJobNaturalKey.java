@@ -46,7 +46,7 @@ public final class DepartmentJobNaturalKey
 	}
 
 	/**
-	 * Код& отдела.
+	 * Код отдела.
 	 * @see DepartmentJob#departmentCode
 	 */
 	private final String departmentCode;

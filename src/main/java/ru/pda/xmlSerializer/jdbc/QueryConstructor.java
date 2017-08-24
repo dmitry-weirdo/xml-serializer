@@ -13,8 +13,12 @@ import static su.opencode.kefir.util.StringUtils.concat;
  * Класс, создающий JDBC-запросы для&nbsp; работы с записями должностей в&nbsp;департаментах.
  * Запросы могут содержать неименованные параметры для&nbsp;использования в&nbsp;{@linkplain java.sql.PreparedStatement PreparedStatement}.
  */
-public class QueryConstructor
+public final class QueryConstructor
 {
+	private QueryConstructor() {
+		// private constructor for utils class
+	}
+
 	public static String getInsertQuery() {
 		return concat(
 			"insert into ", DEPARTMENT_JOB_TABLE_NAME
