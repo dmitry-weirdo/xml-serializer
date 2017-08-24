@@ -1,0 +1,1 @@
+mvn sonar:sonar -Dsonar.jacoco.reportPaths=target/jacoco.exec
