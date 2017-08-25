@@ -17,16 +17,16 @@ public class JdbcDriverRegisterFailException extends Exception
 {
 	public JdbcDriverRegisterFailException() {
 	}
-	public JdbcDriverRegisterFailException(String message) {
+	public JdbcDriverRegisterFailException(final String message) {
 		super(message);
 	}
-	public JdbcDriverRegisterFailException(String message, Throwable cause) {
+	public JdbcDriverRegisterFailException(final String message, final Throwable cause) {
 		super(message, cause);
 	}
-	public JdbcDriverRegisterFailException(Throwable cause) {
+	public JdbcDriverRegisterFailException(final Throwable cause) {
 		super(cause);
 	}
-	public JdbcDriverRegisterFailException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+	public JdbcDriverRegisterFailException(final String message, final Throwable cause, final boolean enableSuppression, final boolean writableStackTrace) {
 		super(message, cause, enableSuppression, writableStackTrace);
 	}
 }

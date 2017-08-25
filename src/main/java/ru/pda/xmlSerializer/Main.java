@@ -7,7 +7,8 @@
  */
 package ru.pda.xmlSerializer;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import ru.pda.xmlSerializer.commandExecutor.ExportDataCommandExecutor;
 import ru.pda.xmlSerializer.commandExecutor.ImportDataCommandExecutor;
 import ru.pda.xmlSerializer.commandExecutor.InsertTestDataCommandExecutor;
@@ -27,17 +28,17 @@ import static su.opencode.kefir.util.StringUtils.concat;
 /**
  * Main-класс приложения, запускаемый из&nbsp;командной строки с&nbsp;параметрами.
  */
-public class Main
+public final class Main
 {
-	public static void main(String[] args) {
+	public static void main(final String[] args) {
 		try
 		{
-			PropertiesConfig config = parsePropertiesConfig(); // файл свойств нужен для конфигурации логгера
+			final PropertiesConfig config = parsePropertiesConfig(); // файл свойств нужен для конфигурации логгера
 			configureLogger(config); // логгер может быть нужен для валидации аргументов командной строки
-			CommandArguments arguments = parseArguments(args);
+			final CommandArguments arguments = parseArguments(args);
 			executeCommand(arguments, config);
 		}
-		catch (Exception e)
+		catch (final Exception e)
 		{ // todo: здесь можно написать отдельное сообщение об ошибке для каждого типа исключения, но не в 6.30 утра. Так исключения будут в стектрейсе
 			UserMessageLogger.logError(logger, "Error while executing the program", e);
 		}
@@ -46,28 +47,28 @@ public class Main
 	private static PropertiesConfig parsePropertiesConfig() throws IncorrectPropertiesFileException {
 		return PropertiesConfig.parseFromPropertiesFile(PROPERTIES_CONFIG_FILE_NAME);
 	}
-	private static void configureLogger(PropertiesConfig config) throws LoggerConfiguringException {
+	private static void configureLogger(final PropertiesConfig config) throws LoggerConfiguringException {
 		LoggerConfigurator.configureLogger(config);
 	}
-	private static CommandArguments parseArguments(String[] arguments) {
+	private static CommandArguments parseArguments(final String[] arguments) {
 		return BasicCommandArguments.parseArgumentsDependingOnCommand(arguments);
 	}
 
-	private static void executeCommand(CommandArguments arguments, PropertiesConfig config) throws JdbcDriverRegisterFailException, SQLException, SerializeToXmlFileException, NonUniqueNaturalKeyException, IncorrectXmlFileException {
+	private static void executeCommand(final CommandArguments arguments, final PropertiesConfig config) throws JdbcDriverRegisterFailException, SQLException, SerializeToXmlFileException, NonUniqueNaturalKeyException, IncorrectXmlFileException {
 		switch (arguments.getCommand())
 		{
 			case INSERT_TEST_DATA:
-				InsertTestDataCommandArguments insertTestDataArguments = (InsertTestDataCommandArguments) arguments;
+				final InsertTestDataCommandArguments insertTestDataArguments = (InsertTestDataCommandArguments) arguments;
 				new InsertTestDataCommandExecutor().execute(insertTestDataArguments, config);
 				break;
 
 			case EXPORT_DATA_TO_XML:
-				ExportDataCommandArguments exportDataCommandArguments = (ExportDataCommandArguments) arguments;
+				final ExportDataCommandArguments exportDataCommandArguments = (ExportDataCommandArguments) arguments;
 				new ExportDataCommandExecutor().execute(exportDataCommandArguments, config);
 				break;
 
 			case IMPORT_DATA_FROM_XML:
-				ImportDataCommandArguments importDataCommandArguments = (ImportDataCommandArguments) arguments;
+				final ImportDataCommandArguments importDataCommandArguments = (ImportDataCommandArguments) arguments;
 				new ImportDataCommandExecutor().execute(importDataCommandArguments, config);
 				break;
 
@@ -76,11 +77,11 @@ public class Main
 		}
 	}
 
-	private static final Logger logger = Logger.getLogger(Main.class);
+	private static final Logger logger = LogManager.getLogger(Main.class);
 
 	/**
 	 * Имя файла настроек приложения.
 	 * // todo: можно принимать его в аргументах командной строки
 	 */
-	public static final String PROPERTIES_CONFIG_FILE_NAME = "xmlSerializer.properties";
+	private static final String PROPERTIES_CONFIG_FILE_NAME = "xmlSerializer.properties";
 }

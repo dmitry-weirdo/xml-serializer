@@ -7,7 +7,8 @@
  */
 package ru.pda.xmlSerializer.jdbc;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import ru.pda.xmlSerializer.UserMessageLogger;
 import ru.pda.xmlSerializer.propertiesConfig.PropertiesConfig;
 
@@ -16,19 +17,17 @@ import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import static su.opencode.kefir.util.StringUtils.concat;
-
 /**
  * Abstract superclass для&nbsp;классов, выполняющих sql-действия в&nbsp;одной транзакции.
  */
 public abstract class JdbcTransactionExecutor
 {
-	public void processTransaction(PropertiesConfig config) throws SQLException, JdbcDriverRegisterFailException {
+	public void processTransaction(final PropertiesConfig config) throws SQLException, JdbcDriverRegisterFailException {
 		try
 		{
 			registerDriver(config);
 		}
-		catch (JdbcDriverRegisterFailException e)
+		catch (final JdbcDriverRegisterFailException e)
 		{
 			UserMessageLogger.logError(logger, "Registering the JDBC driver failed", e);
 			throw e;
@@ -45,7 +44,7 @@ public abstract class JdbcTransactionExecutor
 				connection = createConnection(config);
 				UserMessageLogger.log(logger, "Connection created successfully.");
 			}
-			catch (SQLException e)
+			catch (final SQLException e)
 			{
 				UserMessageLogger.logError(logger, "Creating the connection failed", e);
 				throw e; // prevent executing transactions
@@ -72,7 +71,7 @@ public abstract class JdbcTransactionExecutor
 			}
 		}
 	}
-	private void closeConnection(Connection connection) throws SQLException {
+	private static void closeConnection(final Connection connection) throws SQLException {
 		if (connection == null)
 			return;
 
@@ -82,7 +81,7 @@ public abstract class JdbcTransactionExecutor
 			connection.close();
 			UserMessageLogger.log(logger, "Connection closed successfully.");
 		}
-		catch (SQLException e)
+		catch (final SQLException e)
 		{
 			UserMessageLogger.logError(logger, "Closing the connection failed", e);
 			throw e;
@@ -90,27 +89,27 @@ public abstract class JdbcTransactionExecutor
 		}
 	}
 
-	private void registerDriver(PropertiesConfig config) throws JdbcDriverRegisterFailException {
+	private static void registerDriver(final PropertiesConfig config) throws JdbcDriverRegisterFailException {
 		// todo: register only if the driver is not yet registered
 		Class driverClass = null;
 
 		try
 		{
-			logger.info( concat("Getting JDBC driver class ", config.getDriverClass(), "...") );
+			logger.info( "Getting JDBC driver class {}...", config.getDriverClass() );
 			driverClass = Class.forName( config.getDriverClass() );
-			logger.info( concat("JDBC driver class ", config.getDriverClass(), " gotten successfully.") );
+			logger.info( "JDBC driver class {} gotten successfully.", config.getDriverClass() );
 		}
-		catch (ClassNotFoundException e)
+		catch (final ClassNotFoundException e)
 		{
 			throw new JdbcDriverRegisterFailException(e);
 		}
 
-		Object driver = null;
+		final Object driver;
 		try
 		{
-			logger.info( concat("Instantiating JDBC driver class ", driverClass.getName(), "...") );
+			logger.info( "Instantiating JDBC driver class {}...", driverClass.getName() );
 			driver = driverClass.newInstance();
-			logger.info( concat("JDBC driver class ", driverClass.getName(), " instantiated successfully.") );
+			logger.info( "JDBC driver class {} instantiated successfully.", driverClass.getName() );
 		}
 		catch (InstantiationException | IllegalAccessException e)
 		{
@@ -119,21 +118,21 @@ public abstract class JdbcTransactionExecutor
 
 		if ( !(driver instanceof Driver) )
 		{
-			throw new JdbcDriverRegisterFailException( concat("Class ", driver.getClass().getName(), " is not an instance of ", Driver.class.getName()) );
+			throw new JdbcDriverRegisterFailException( String.format("Class %s is not an instance of %s", driver.getClass().getName(), Driver.class.getName()) );
 		}
 
 		try
 		{
 			DriverManager.registerDriver((Driver) driver);
-			logger.info( concat("JDBC driver class ", driverClass.getName(), " registered successfully.") );
+			logger.info( "JDBC driver class {} registered successfully.", driverClass.getName() );
 		}
-		catch (SQLException e)
+		catch (final SQLException e)
 		{
 			throw new JdbcDriverRegisterFailException(e);
 		}
 	}
 
-	private Connection createConnection(PropertiesConfig config) throws SQLException {
+	private static Connection createConnection(final PropertiesConfig config) throws SQLException {
 		return DriverManager.getConnection(config.getConnectionUrl(), config.getUserName(), config.getPassword());
 	}
 
@@ -142,7 +141,7 @@ public abstract class JdbcTransactionExecutor
 	 * @return <code>true</code> &mdash; если транзакция успешно выполнилась и&nbsp;закоммитилась; <code>false</code> &mdash; в&nbsp;противном случае.
 	 * @throws SQLException в&nbsp;случае ошибки при&nbsp;выполненин транзакции, либо ее коммите или&nbsp;откате.
 	 */
-	protected boolean executeTransaction(Connection connection) throws SQLException {
+	protected boolean executeTransaction(final Connection connection) throws SQLException {
 		try
 		{
 			connection.setAutoCommit(false);
@@ -151,7 +150,7 @@ public abstract class JdbcTransactionExecutor
 			UserMessageLogger.log(logger, "Transaction committed successfully.");
 			return true;
 		}
-		catch (Exception e)
+		catch (final Exception e)
 		{
 			UserMessageLogger.logError(logger, "Transaction execution failed", e);
 
@@ -161,7 +160,7 @@ public abstract class JdbcTransactionExecutor
 				connection.rollback();
 				UserMessageLogger.log(logger, "Transaction rolled back successfully.");
 			}
-			catch (SQLException e1)
+			catch (final SQLException e1)
 			{
 				UserMessageLogger.logError(logger, "Transaction rollback failed", e);
 				throw e1;
@@ -192,5 +191,5 @@ public abstract class JdbcTransactionExecutor
 		// default do nothing
 	}
 
-	protected static final Logger logger = Logger.getLogger(JdbcTransactionExecutor.class);
+	protected static final Logger logger = LogManager.getLogger(JdbcTransactionExecutor.class);
 }

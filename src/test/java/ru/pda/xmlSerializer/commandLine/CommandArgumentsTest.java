@@ -7,8 +7,8 @@
  */
 package ru.pda.xmlSerializer.commandLine;
 
-import org.apache.log4j.BasicConfigurator;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
 import su.opencode.kefir.util.StringUtils;
@@ -21,7 +21,8 @@ public class CommandArgumentsTest
 {
 	@Before
 	public void configureLogger() {
-		BasicConfigurator.configure();
+//		BasicConfigurator.configure();
+		// log4j seems to be set to console output by default
 	}
 
 	@Test(expected = IllegalArgumentException.class)
@@ -124,13 +125,13 @@ public class CommandArgumentsTest
 	public void testExportDataEmptyFileName() {
 		parseArguments( Command.EXPORT_DATA_TO_XML.toString(), "    " );
 	}
-	@Test()
+	@Test
 	public void testExportDataCorrectArguments() {
 		final String fileName = "xmlData.xml";
-		CommandArguments parsedArguments = parseArguments(Command.EXPORT_DATA_TO_XML.toString(), fileName);
+		final CommandArguments parsedArguments = parseArguments(Command.EXPORT_DATA_TO_XML.toString(), fileName);
 		assertTrue(parsedArguments instanceof ExportDataCommandArguments);
 
-		ExportDataCommandArguments exportDataCommandArguments = (ExportDataCommandArguments) parsedArguments;
+		final ExportDataCommandArguments exportDataCommandArguments = (ExportDataCommandArguments) parsedArguments;
 		assertEquals(fileName, exportDataCommandArguments.getFileName());
 	}
 
@@ -142,18 +143,18 @@ public class CommandArgumentsTest
 	public void testImportDataEmptyFileName() {
 		parseArguments( Command.IMPORT_DATA_FROM_XML.toString(), "    " );
 	}
-	@Test()
+	@Test
 	public void testImportDataCorrectArguments() {
 		final String fileName = "xmlData.xml";
-		CommandArguments parsedArguments = parseArguments(Command.IMPORT_DATA_FROM_XML.toString(), fileName);
+		final CommandArguments parsedArguments = parseArguments(Command.IMPORT_DATA_FROM_XML.toString(), fileName);
 		assertTrue(parsedArguments instanceof ImportDataCommandArguments);
 
-		ImportDataCommandArguments exportDataCommandArguments = (ImportDataCommandArguments) parsedArguments;
+		final ImportDataCommandArguments exportDataCommandArguments = (ImportDataCommandArguments) parsedArguments;
 		assertEquals(fileName, exportDataCommandArguments.getFileName());
 	}
 
 
-	private CommandArguments parseArguments(String... arguments) {
+	private CommandArguments parseArguments(final String... arguments) {
 		logger.info("");
 		logger.info("====================================");
 		logger.info( concat(sb, "arguments: ", StringUtils.getSeparatedString(" ", arguments)) );
@@ -162,7 +163,7 @@ public class CommandArgumentsTest
 		{
 			return BasicCommandArguments.parseArgumentsDependingOnCommand(arguments);
 		}
-		catch (RuntimeException e)
+		catch (final RuntimeException e)
 		{
 			logger.error("Error while parsing arguments", e);
 			throw e;
@@ -170,5 +171,5 @@ public class CommandArgumentsTest
 	}
 
 	private final StringBuilder sb = new StringBuilder();
-	private static final Logger logger = Logger.getLogger(CommandArgumentsTest.class);
+	private static final Logger logger = LogManager.getLogger(CommandArgumentsTest.class);
 }

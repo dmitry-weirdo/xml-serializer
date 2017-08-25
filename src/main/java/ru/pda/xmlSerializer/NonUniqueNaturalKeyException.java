@@ -15,16 +15,16 @@ public class NonUniqueNaturalKeyException extends Exception
 {
 	public NonUniqueNaturalKeyException() {
 	}
-	public NonUniqueNaturalKeyException(String message) {
+	public NonUniqueNaturalKeyException(final String message) {
 		super(message);
 	}
-	public NonUniqueNaturalKeyException(String message, Throwable cause) {
+	public NonUniqueNaturalKeyException(final String message, final Throwable cause) {
 		super(message, cause);
 	}
-	public NonUniqueNaturalKeyException(Throwable cause) {
+	public NonUniqueNaturalKeyException(final Throwable cause) {
 		super(cause);
 	}
-	public NonUniqueNaturalKeyException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+	public NonUniqueNaturalKeyException(final String message, final Throwable cause, final boolean enableSuppression, final boolean writableStackTrace) {
 		super(message, cause, enableSuppression, writableStackTrace);
 	}
 }

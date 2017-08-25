@@ -19,25 +19,25 @@ public class ImportDataModifyJobs
 	public List<DepartmentJob> getJobsToInsert() {
 		return jobsToInsert;
 	}
-	public void setJobsToInsert(List<DepartmentJob> jobsToInsert) {
+	public void setJobsToInsert(final List<DepartmentJob> jobsToInsert) {
 		this.jobsToInsert = jobsToInsert;
 	}
 	public List<DepartmentJob> getJobsToUpdate() {
 		return jobsToUpdate;
 	}
-	public void setJobsToUpdate(List<DepartmentJob> jobsToUpdate) {
+	public void setJobsToUpdate(final List<DepartmentJob> jobsToUpdate) {
 		this.jobsToUpdate = jobsToUpdate;
 	}
 	public List<DepartmentJob> getJobsToDelete() {
 		return jobsToDelete;
 	}
-	public void setJobsToDelete(List<DepartmentJob> jobsToDelete) {
+	public void setJobsToDelete(final List<DepartmentJob> jobsToDelete) {
 		this.jobsToDelete = jobsToDelete;
 	}
 	public int getUnmodifiedJobsCount() {
 		return unmodifiedJobsCount;
 	}
-	public void setUnmodifiedJobsCount(int unmodifiedJobsCount) {
+	public void setUnmodifiedJobsCount(final int unmodifiedJobsCount) {
 		this.unmodifiedJobsCount = unmodifiedJobsCount;
 	}
 

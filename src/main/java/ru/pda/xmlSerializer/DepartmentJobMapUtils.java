@@ -7,7 +7,6 @@
  */
 package ru.pda.xmlSerializer;
 
-import su.opencode.kefir.util.ObjectUtils;
 
 import java.util.Collections;
 import java.util.HashMap;

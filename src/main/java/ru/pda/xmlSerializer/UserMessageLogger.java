@@ -7,7 +7,8 @@
  */
 package ru.pda.xmlSerializer;
 
-import org.apache.log4j.Logger;
+
+import org.apache.logging.log4j.Logger;
 
 import static su.opencode.kefir.util.StringUtils.concat;
 
@@ -22,23 +23,23 @@ public final class UserMessageLogger
 		// private constructor for utils class
 	}
 
-	public static void log(Logger logger, String message) {
+	public static void log(final Logger logger, final String message) {
 		logger.info(message);
 		log(message);
 	}
-	public static void log(Logger logger, String... messages) {
-		String concatenatedMessage = concat(messages);
+	public static void log(final Logger logger, final String... messages) {
+		final String concatenatedMessage = concat(messages);
 		logger.info(concatenatedMessage);
 		log(concatenatedMessage);
 	}
-	public static void log(String message) {
+	public static void log(final String message) {
 		System.out.println(message);
 	}
-	public static void log(String... messages) {
+	public static void log(final String... messages) {
 		System.out.println( concat(messages) );
 	}
 
-	public static void logError(Logger logger, String message, Throwable e) {
+	public static void logError(final Logger logger, final String message, final Throwable e) {
 		logger.error(message, e);
 
 		System.out.println(message);

@@ -23,7 +23,7 @@ public class DepartmentJobs
 	public List<DepartmentJob> getJobs() {
 		return jobs;
 	}
-	public void setJobs(List<DepartmentJob> jobs) {
+	public void setJobs(final List<DepartmentJob> jobs) {
 		this.jobs = jobs;
 	}
 

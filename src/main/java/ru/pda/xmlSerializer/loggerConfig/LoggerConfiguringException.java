@@ -15,16 +15,16 @@ public class LoggerConfiguringException extends Exception
 {
 	public LoggerConfiguringException() {
 	}
-	public LoggerConfiguringException(String message) {
+	public LoggerConfiguringException(final String message) {
 		super(message);
 	}
-	public LoggerConfiguringException(String message, Throwable cause) {
+	public LoggerConfiguringException(final String message, final Throwable cause) {
 		super(message, cause);
 	}
-	public LoggerConfiguringException(Throwable cause) {
+	public LoggerConfiguringException(final Throwable cause) {
 		super(cause);
 	}
-	public LoggerConfiguringException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+	public LoggerConfiguringException(final String message, final Throwable cause, final boolean enableSuppression, final boolean writableStackTrace) {
 		super(message, cause, enableSuppression, writableStackTrace);
 	}
 }

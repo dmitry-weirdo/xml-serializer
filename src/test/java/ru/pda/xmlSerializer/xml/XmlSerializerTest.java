@@ -7,12 +7,11 @@
  */
 package ru.pda.xmlSerializer.xml;
 
-import org.apache.log4j.BasicConfigurator;
 import org.junit.Before;
 import org.junit.Test;
 import ru.pda.xmlSerializer.DepartmentJob;
 import ru.pda.xmlSerializer.DepartmentJobs;
-import su.opencode.kefir.util.ObjectUtils;
+import ru.pda.xmlSerializer.ObjectUtils;
 
 import java.net.URL;
 import java.util.List;
@@ -23,12 +22,13 @@ public class XmlSerializerTest
 {
 	@Before
 	public void configureLogger() {
-		BasicConfigurator.configure();
+//		BasicConfigurator.configure();
+		// log4j seems to be set to console output by default
 	}
 
 	@Test(expected = IncorrectXmlFileException.class)
 	public void testNonExistingFile() throws IncorrectXmlFileException {
-		XmlSerializer serializer = new XmlSerializer();
+		final XmlSerializer serializer = new XmlSerializer();
 		serializer.deserializeFromXmlUsingDomParser("nonExistingFile.xml");
 	}
 	@Test(expected = IncorrectXmlFileException.class)
@@ -58,7 +58,7 @@ public class XmlSerializerTest
 		serializeResource("/xml/departmentCodeInnerElements.xml");
 	}
 	@Test(expected = IncorrectXmlFileException.class)
-	public void testDepartmentСodeMultipleChildElements() throws IncorrectXmlFileException {
+	public void testDepartmentCodeMultipleChildElements() throws IncorrectXmlFileException {
 		serializeResource("/xml/departmentCodeMultipleChildElements.xml");
 	}
 	@Test(expected = IncorrectXmlFileException.class)
@@ -132,42 +132,42 @@ public class XmlSerializerTest
 		serializeResource("/xml/descriptionTooLong.xml");
 	}
 
-	@Test()
+	@Test
 	public void testNoJobsXml() throws IncorrectXmlFileException {
-		DepartmentJobs departmentJobs = serializeResource("/xml/noJobs.xml");
+		final DepartmentJobs departmentJobs = serializeResource("/xml/noJobs.xml");
 		assertNotNull(departmentJobs);
 
 		assertTrue( ObjectUtils.empty(departmentJobs.getJobs()) );
 	}
 
-	@Test()
+	@Test
 	public void testCorrectXml() throws IncorrectXmlFileException {
-		DepartmentJobs departmentJobs = serializeResource("/xml/correct.xml");
+		final DepartmentJobs departmentJobs = serializeResource("/xml/correct.xml");
 		assertNotNull(departmentJobs);
 
-		List<DepartmentJob> jobs = departmentJobs.getJobs();
+		final List<DepartmentJob> jobs = departmentJobs.getJobs();
 		assertNotNull(jobs);
 		assertEquals(4, jobs.size());
 
-		DepartmentJob job0 = jobs.get(0);
+		final DepartmentJob job0 = jobs.get(0);
 		assertNull( job0.getId() );
 		assertEquals( "12345678901234567890", job0.getDepartmentCode() );
 		assertEquals( "1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890", job0.getJobName() );
 		assertNull( job0.getDescription() );
 
-		DepartmentJob job1 = jobs.get(1);
+		final DepartmentJob job1 = jobs.get(1);
 		assertNull( job1.getId() );
 		assertEquals( "Department 1", job1.getDepartmentCode() );
 		assertEquals( "Job 2", job1.getJobName() );
 		assertNull(job1.getDescription());
 
-		DepartmentJob job2 = jobs.get(2);
+		final DepartmentJob job2 = jobs.get(2);
 		assertNull( job2.getId() );
 		assertEquals( "Department 1", job2.getDepartmentCode() );
 		assertEquals( "Job 3", job2.getJobName() );
 		assertEquals( "123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345", job2.getDescription() );
 
-		DepartmentJob job3 = jobs.get(3);
+		final DepartmentJob job3 = jobs.get(3);
 		assertNull( job3.getId() );
 		assertEquals("Department 1", job3.getDepartmentCode());
 		assertEquals("Job 4", job3.getJobName());
@@ -175,11 +175,11 @@ public class XmlSerializerTest
 	}
 
 
-	private DepartmentJobs serializeResource(String resourceName) throws IncorrectXmlFileException {
-		URL resource = getClass().getResource(resourceName);
-		String fileName = resource.getPath();
+	private DepartmentJobs serializeResource(final String resourceName) throws IncorrectXmlFileException {
+		final URL resource = getClass().getResource(resourceName);
+		final String fileName = resource.getPath();
 
-		XmlSerializer serializer = new XmlSerializer();
+		final XmlSerializer serializer = new XmlSerializer();
 		return serializer.deserializeFromXmlUsingDomParser(fileName);
 	}
 }
