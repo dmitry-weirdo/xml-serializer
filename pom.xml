@@ -99,8 +99,55 @@
 				</executions>
 			</plugin>
 
+			<!-- Clover plugin -->
+			<plugin>
+				<groupId>org.openclover</groupId>
+				<artifactId>clover-maven-plugin</artifactId>
+
+				<executions>
+
+					<!-- Instrument sources whenever you build ( instrumented jar will be located in /target/clover/*-clover.jar ) -->
+					<execution>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>instrument</goal>
+						</goals>
+					</execution>
+
+					<!-- include aggregation of child modules -->
+					<execution>
+						<id>main</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>instrument</goal>
+							<goal>aggregate</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>site</id>
+						<phase>pre-site</phase>
+						<goals>
+							<goal>instrument</goal>
+							<goal>aggregate</goal>
+						</goals>
+					</execution>
+
+				</executions>
+			</plugin>
+
 		</plugins>
 	</build>
+
+	<reporting>
+		<plugins>
+
+			<!-- generate a Clover report when you run the "site" goal -->
+			<plugin>
+				<groupId>org.openclover</groupId>
+				<artifactId>clover-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</reporting>
 
 	<dependencies>
 
